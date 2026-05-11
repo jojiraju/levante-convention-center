@@ -136,7 +136,7 @@ Message: ${message}`;
               </div>
 
               <button type="submit" className={styles.submitBtn}>
-                Send Inquiry via WhatsApp
+                Submit
               </button>
             </form>
           </motion.div>

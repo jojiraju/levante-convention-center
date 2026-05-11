@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -10,21 +9,16 @@ import Services from "@/components/Services";
 import Gallery from "@/components/Gallery";
 import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
-import BookingModal from "@/components/BookingModal";
 import ScrollToTop from "@/components/ScrollToTop";
+import Link from "next/link";
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
   return (
     <main>
       <Preloader />
-      <Navbar onBookNow={openModal} />
-      <Hero onPlanEvent={openModal} />
-      <About onInquire={openModal} />
+      <Navbar />
+      <Hero />
+      <About />
       <Venues />
       <Catalog />
       <Services />
@@ -35,14 +29,12 @@ export default function Home() {
         <h1 className="mb-12 max-w-4xl" style={{ fontSize: 'clamp(2rem, 8vw, 4.5rem)', lineHeight: '1.1' }}>
           Let's Create Something Remarkable Together
         </h1>
-        <button onClick={openModal} className="premium-button" style={{ borderColor: 'var(--primary)', color: 'var(--primary)' }}>
+        <Link href="/book" className="premium-button" style={{ borderColor: 'var(--primary)', color: 'var(--primary)', textDecoration: 'none' }}>
           Get in Touch
-        </button>
+        </Link>
       </section>
       <Footer />
       <ScrollToTop />
-      
-      <BookingModal isOpen={isModalOpen} onClose={closeModal} />
     </main>
   );
 }

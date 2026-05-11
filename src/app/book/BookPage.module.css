@@ -1,0 +1,207 @@
+.bookMain {
+  background-color: var(--primary);
+  min-height: 100vh;
+  padding-top: 120px; /* Space for Navbar */
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.contentSide {
+  position: sticky;
+  top: 180px;
+}
+
+.tagline {
+  color: var(--secondary);
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  display: block;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 30px;
+}
+
+.description {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-dim);
+  max-width: 500px;
+  margin-bottom: 50px;
+}
+
+.benefitList {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.benefitItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+}
+
+.benefitDot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--secondary);
+  border-radius: 50%;
+}
+
+.formSide {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  padding: 60px;
+  border-radius: 12px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+}
+
+.formSection {
+  margin-bottom: 40px;
+}
+
+.sectionTitle {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--secondary);
+  margin-bottom: 30px;
+  display: block;
+  font-weight: 700;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.fullWidth {
+  grid-column: span 2;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.input, .textarea {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  color: #fff;
+  outline: none;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  transition: all 0.3s var(--transition);
+  border-radius: 4px;
+}
+
+.input:focus, .textarea:focus {
+  border-color: var(--secondary);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+.submitBtn {
+  width: 100%;
+  background-color: var(--secondary);
+  color: var(--primary);
+  font-weight: 800;
+  padding: 22px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.85rem;
+  transition: all 0.4s var(--transition);
+  margin-top: 20px;
+}
+
+.submitBtn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(197, 160, 89, 0.3);
+}
+
+/* Fix browser autofill styling */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover, 
+.input:-webkit-autofill:focus,
+.textarea:-webkit-autofill,
+.textarea:-webkit-autofill:hover,
+.textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff !important;
+  -webkit-box-shadow: 0 0 0px 1000px #0A1128 inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+  font-family: var(--font-sans) !important;
+}
+
+@media (max-width: 1100px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+  
+  .contentSide {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .bookMain {
+    padding-top: 100px;
+  }
+  
+  .container {
+    padding: 40px 20px;
+  }
+  
+  .formSide {
+    padding: 40px 20px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .fullWidth {
+    grid-column: span 1;
+  }
+}

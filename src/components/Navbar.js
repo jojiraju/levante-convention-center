@@ -1,12 +1,12 @@
-"use client";
-
-import { motion, useScroll } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Magnetic from "./Magnetic";
+import { HiMenuAlt4, HiX } from "react-icons/hi";
+import styles from "./Header.module.css";
 
-export default function Navbar({ onBookNow }) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,59 +16,113 @@ export default function Navbar({ onBookNow }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const { scrollYProgress } = useScroll();
+  const navLinks = [
+    { name: "About", href: "#about" },
+    { name: "Venues", href: "#venues" },
+    { name: "Services", href: "#services" },
+    { name: "Pricing", href: "#catalog" },
+    { name: "Gallery", href: "#gallery" },
+    { name: "Contact", href: "#contact" }
+  ];
 
   return (
     <>
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 z-[60]"
-        style={{ scaleX: scrollYProgress, transformOrigin: "0%", backgroundColor: 'var(--secondary)' }}
-      />
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-        className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center px-5percent py-6 transition-all duration-500 ${
-          scrolled ? "backdrop-blur-md py-4" : "bg-transparent"
-        }`}
-        style={{ backgroundColor: scrolled ? "rgba(10, 17, 40, 0.9)" : "transparent" }}
-      >
-        <div className="logo">
-          <Link href="/" className="flex flex-col items-center">
-            <span style={{ 
-              fontFamily: "var(--font-serif)", 
-              fontSize: "1.8rem", 
-              lineHeight: "1",
-              letterSpacing: "0.2em",
-              fontWeight: "400",
-              borderBottom: "1px solid var(--secondary)",
-              paddingBottom: "5px"
-            }}>
-              LEVANTE
-            </span>
-            <span className="text-[0.5rem] tracking-[0.5em] mt-2 opacity-60 uppercase font-sans" style={{ fontSize: '0.5rem', letterSpacing: '0.5em' }}>
-              Convention Center
-            </span>
+      <header className={`${styles.header} ${scrolled ? styles.headerScrolled : ""}`}>
+        <div className={styles.container}>
+          <Link href="/" className={styles.logoWrapper}>
+            <span className={styles.logoMain}>LEVANTE</span>
+            <span className={styles.logoSub}>Convention Center</span>
           </Link>
-        </div>
 
-        <div className="links hidden md:flex gap-8 lg:gap-16 uppercase font-light" style={{ fontSize: '0.65rem', letterSpacing: '0.3em' }}>
-          {["About", "Venues", "Services", "Pricing", "Gallery", "Contact"].map((item) => (
-            <Link 
-              key={item} 
-              href={`#${item === "Pricing" ? "catalog" : item.toLowerCase()}`} 
-              className="relative group overflow-hidden"
+          <nav className={styles.nav}>
+            {navLinks.map((link) => (
+              <Link key={link.name} href={link.href} className={styles.navLink}>
+                <span className={styles.linkText}>{link.name}</span>
+                <span className={`${styles.linkText} ${styles.linkHover}`}>{link.name}</span>
+              </Link>
+            ))}
+          </nav>
+
+          <div className={styles.cta}>
+            <Link href="/book" className={styles.bookBtn}>Book Now</Link>
+            <motion.button 
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className={styles.menuTrigger} 
+              onClick={() => setIsMenuOpen(true)}
             >
-              <span className="block transition-transform duration-500 group-hover:-translate-y-full">{item}</span>
-              <span className="absolute top-full left-0 block transition-transform duration-500 group-hover:-translate-y-full" style={{ color: 'var(--secondary)' }}>{item}</span>
-            </Link>
-          ))}
+              <div style={{ width: '30px', height: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <motion.span 
+                  style={{ width: '100%', height: '2px', backgroundColor: '#fff', display: 'block', borderRadius: '10px' }}
+                />
+                <motion.span 
+                  style={{ width: '100%', height: '2px', backgroundColor: '#fff', display: 'block', borderRadius: '10px' }}
+                />
+                <motion.span 
+                  style={{ width: '100%', height: '2px', backgroundColor: '#fff', display: 'block', borderRadius: '10px' }}
+                />
+              </div>
+            </motion.button>
+          </div>
         </div>
+      </header>
 
-        <div className="cta">
-          <button onClick={onBookNow} className="premium-button py-2 px-6">Book Now</button>
-        </div>
-      </motion.nav>
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+            className={styles.mobileOverlay}
+          >
+            <div className={styles.closeWrapper}>
+              <motion.button 
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                whileHover={{ rotate: 90 }}
+                onClick={() => setIsMenuOpen(false)} 
+                className={styles.closeBtn}
+              >
+                <div style={{ width: '35px', height: '35px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ position: 'absolute', width: '100%', height: '2px', backgroundColor: '#fff', transform: 'rotate(45deg)', borderRadius: '10px' }} />
+                  <span style={{ position: 'absolute', width: '100%', height: '2px', backgroundColor: '#fff', transform: 'rotate(-45deg)', borderRadius: '10px' }} />
+                </div>
+              </motion.button>
+            </div>
+
+            <nav className={styles.mobileNav}>
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 + (i * 0.1) }}
+                >
+                  <Link 
+                    href={link.href} 
+                    onClick={() => setIsMenuOpen(false)}
+                    className={styles.mobileNavLink}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+
+            <div className={styles.mobileCtaWrapper}>
+              <Link 
+                href="/book" 
+                onClick={() => setIsMenuOpen(false)}
+                className={styles.mobileCta}
+              >
+                Start Your Journey
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

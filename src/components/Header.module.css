@@ -1,0 +1,221 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 30px 5%;
+  transition: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.headerScrolled {
+  padding: 15px 5%;
+  background: rgba(10, 17, 40, 0.85);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+}
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logoMain {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  letter-spacing: 0.2em;
+  color: var(--text);
+  line-height: 1;
+  border-bottom: 1px solid var(--secondary);
+  padding-bottom: 5px;
+}
+
+.logoSub {
+  font-family: var(--font-sans);
+  font-size: 0.55rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 8px;
+}
+
+.nav {
+  display: flex;
+  gap: 60px;
+}
+
+.navLink {
+  position: relative;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--text);
+  overflow: hidden;
+  height: 20px;
+  display: block;
+}
+
+.linkText {
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.linkHover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: var(--secondary);
+}
+
+.navLink:hover .linkText {
+  transform: translateY(-100%);
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.bookBtn {
+  background: var(--secondary);
+  color: var(--primary);
+  padding: 12px 30px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  transition: all 0.3s var(--transition);
+}
+
+.bookBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2);
+}
+
+.menuTrigger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Mobile Menu Overlay Styles */
+.mobileOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: #050A1A;
+  z-index: 3000; /* Higher than any other UI element */
+  display: flex;
+  flex-direction: column;
+  padding: 40px 30px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.closeWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 40px;
+  flex-shrink: 0;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.mobileNavLink {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  color: #fff;
+  text-decoration: none;
+  line-height: 1.1;
+  transition: color 0.3s ease;
+}
+
+.mobileNavLink:hover {
+  color: var(--secondary);
+}
+
+.mobileCtaWrapper {
+  margin-top: auto;
+  padding-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.mobileCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  background-color: var(--secondary);
+  color: var(--primary);
+  text-align: center;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    display: none;
+  }
+  
+  .menuTrigger {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 20px 20px;
+  }
+  
+  .logoMain {
+    font-size: 1.4rem;
+  }
+  
+  .logoSub {
+    font-size: 0.45rem;
+    letter-spacing: 0.4em;
+  }
+  
+  .bookBtn {
+    display: none; /* Hide button on very small screens to avoid clutter, show in mobile menu */
+  }
+}
