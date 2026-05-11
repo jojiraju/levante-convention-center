@@ -1,10 +1,9 @@
-"use client";
-
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { X, Calendar as CalendarIcon } from "lucide-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import styles from "./BookingModal.module.css";
 
 export default function BookingModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -42,89 +41,50 @@ Message: ${message}`;
     onClose();
   };
 
-  const inputStyle = {
-    width: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    border: '1px solid var(--border)',
-    padding: '12px 16px',
-    color: '#fff',
-    outline: 'none',
-    fontSize: '0.9rem',
-    fontFamily: 'var(--font-sans)',
-    marginBottom: '20px'
-  };
-
-  const labelStyle = {
-    display: 'block',
-    fontSize: '0.6rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.2em',
-    color: 'var(--text-dim)',
-    marginBottom: '8px'
-  };
-
   return (
     <AnimatePresence mode="wait">
       {isOpen && (
-        <motion.div key="booking-modal-overlay" style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+        <div className={styles.overlay}>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(5px)' }}
+            className={styles.backdrop}
           />
 
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            initial={{ scale: 0.95, opacity: 0, y: 30 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            style={{
-              position: 'relative',
-              width: '100%',
-              maxWidth: '550px',
-              backgroundColor: '#0A1128',
-              border: '1px solid var(--border)',
-              padding: '40px',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
-            }}
+            exit={{ scale: 0.95, opacity: 0, y: 30 }}
+            className={styles.modalContent}
           >
-            <button
-              onClick={onClose}
-              style={{
-                position: 'absolute',
-                top: '20px',
-                right: '20px',
-                background: 'none',
-                border: 'none',
-                color: 'rgba(255,255,255,0.5)',
-                cursor: 'pointer'
-              }}
-            >
+            <button onClick={onClose} className={styles.closeButton}>
               <X size={24} />
             </button>
 
-            <h2 style={{ fontSize: '2rem', marginBottom: '10px', fontFamily: 'var(--font-serif)' }}>Book an Event</h2>
-            <p style={{ color: 'var(--secondary)', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '30px' }}>
+            <h2 className={styles.title}>Book an Event</h2>
+            <p className={styles.subtitle}>
               Let's create something extraordinary
             </p>
 
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label style={labelStyle}>Your Name</label>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Your Name</label>
                 <input
                   type="text"
                   name="name"
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  style={inputStyle}
+                  className={styles.input}
+                  placeholder="John Doe"
                 />
               </div>
 
-              <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
-                <div style={{ flex: 1 }}>
-                  <label style={labelStyle}>Event Type</label>
+              <div className={styles.flexRow}>
+                <div className={styles.flexItem}>
+                  <label className={styles.label}>Event Type</label>
                   <input
                     type="text"
                     name="event"
@@ -132,11 +92,11 @@ Message: ${message}`;
                     required
                     value={formData.event}
                     onChange={handleChange}
-                    style={{ ...inputStyle, marginBottom: 0 }}
+                    className={styles.input}
                   />
                 </div>
-                <div style={{ flex: 1 }}>
-                  <label style={labelStyle}>Date</label>
+                <div className={styles.flexItem}>
+                  <label className={styles.label}>Date</label>
                   <div className="custom-datepicker-wrapper">
                     <DatePicker
                       selected={formData.date}
@@ -150,63 +110,59 @@ Message: ${message}`;
                 </div>
               </div>
 
-              <div className="form-group">
-                <label style={labelStyle}>Number of Guests</label>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Number of Guests</label>
                 <input
                   type="number"
                   name="guests"
                   required
                   value={formData.guests}
                   onChange={handleChange}
-                  style={inputStyle}
+                  className={styles.input}
+                  placeholder="150"
                 />
               </div>
 
-              <div className="form-group">
-                <label style={labelStyle}>Additional Details</label>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Additional Details</label>
                 <textarea
                   name="message"
                   rows="3"
                   value={formData.message}
                   onChange={handleChange}
-                  style={{ ...inputStyle, resize: 'none' }}
+                  className={styles.textarea}
+                  placeholder="Share any specific requirements..."
                 ></textarea>
               </div>
 
-              <button
-                type="submit"
-                className="premium-button"
-                style={{
-                  width: '100%',
-                  backgroundColor: 'var(--secondary)',
-                  color: 'var(--primary)',
-                  fontWeight: 'bold',
-                  marginTop: '10px'
-                }}
-              >
-                Submit
+              <button type="submit" className={styles.submitBtn}>
+                Send Inquiry via WhatsApp
               </button>
             </form>
           </motion.div>
-        </motion.div>
+        </div>
       )}
       <style jsx global>{`
         .custom-datepicker-wrapper {
           position: relative;
           width: 100%;
-          display: block;
         }
         .custom-datepicker {
           width: 100%;
-          background-color: rgba(255, 255, 255, 0.05);
+          background-color: rgba(255, 255, 255, 0.03);
           border: 1px solid var(--border);
-          padding: 12px 40px 12px 16px;
+          padding: 14px 40px 14px 18px;
           color: #fff;
           outline: none;
-          font-size: 0.9rem;
+          font-size: 0.95rem;
           font-family: var(--font-sans);
           border-radius: 4px;
           box-sizing: border-box;
+          transition: all 0.3s ease;
+        }
+        .custom-datepicker:focus {
+          border-color: var(--secondary);
+          background-color: rgba(255, 255, 255, 0.07);
         }
         .calendar-icon {
           position: absolute;
@@ -241,7 +197,6 @@ Message: ${message}`;
         .react-datepicker__triangle {
           display: none !important;
         }
-        /* Hide number input spin buttons */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
           -webkit-appearance: none;
