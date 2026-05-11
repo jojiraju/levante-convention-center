@@ -25,11 +25,11 @@ export default function Footer() {
             <div className={styles.linkColumn}>
               <h4 className={styles.columnHeader}>Quick Links</h4>
               <ul className={styles.linkList}>
-                <li className={styles.linkItem}><Link href="#about" className={styles.link}>About Us</Link></li>
-                <li className={styles.linkItem}><Link href="#venues" className={styles.link}>Venues</Link></li>
-                <li className={styles.linkItem}><Link href="#services" className={styles.link}>Services</Link></li>
-                <li className={styles.linkItem}><Link href="#catalog" className={styles.link}>Pricing</Link></li>
-                <li className={styles.linkItem}><Link href="#gallery" className={styles.link}>Gallery</Link></li>
+                <li className={styles.linkItem}><Link href="/#about" className={styles.link}>About Us</Link></li>
+                <li className={styles.linkItem}><Link href="/#venues" className={styles.link}>Venues</Link></li>
+                <li className={styles.linkItem}><Link href="/#services" className={styles.link}>Services</Link></li>
+                <li className={styles.linkItem}><Link href="/#catalog" className={styles.link}>Pricing</Link></li>
+                <li className={styles.linkItem}><Link href="/#gallery" className={styles.link}>Gallery</Link></li>
               </ul>
             </div>
 

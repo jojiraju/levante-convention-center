@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+import { HiArrowRight } from "react-icons/hi";
 import styles from "./Hero.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -91,7 +92,7 @@ export default function Hero() {
             className={styles.buttonGroup}
           >
             <Link 
-              href="#venues" 
+              href="/#venues" 
               className={styles.primaryBtn}
             >
               Explore Venues
