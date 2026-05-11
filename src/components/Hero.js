@@ -4,12 +4,12 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { HiArrowRight } from "react-icons/hi";
+import Link from "next/link";
 import styles from "./Hero.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Hero({ onPlanEvent }) {
+export default function Hero() {
   const containerRef = useRef(null);
   const imageRef = useRef(null);
 
@@ -90,23 +90,23 @@ export default function Hero({ onPlanEvent }) {
             transition={{ duration: 1.2, delay: 2 }}
             className={styles.buttonGroup}
           >
-            <button 
-              onClick={onPlanEvent} 
+            <Link 
+              href="#venues" 
               className={styles.primaryBtn}
             >
               Explore Venues
               <div className={styles.shimmer} />
-            </button>
+            </Link>
             
-            <button 
-              onClick={onPlanEvent} 
+            <Link 
+              href="/book" 
               className={styles.secondaryBtn}
             >
               <span>Book Your Event</span>
               <div className={styles.iconCircle}>
                 <HiArrowRight size={18} />
               </div>
-            </button>
+            </Link>
           </motion.div>
         </div>
       </div>
