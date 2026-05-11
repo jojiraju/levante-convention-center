@@ -1,0 +1,66 @@
+.scrollWrapper {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  width: 54px;
+  height: 54px;
+  z-index: 999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrollButton {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(10, 17, 40, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s var(--transition);
+  color: var(--secondary);
+  z-index: 2;
+}
+
+.scrollButton:hover {
+  background: var(--secondary);
+  color: var(--primary);
+  transform: scale(1.1);
+  border-color: var(--secondary);
+}
+
+.progressRing {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.progressRingCircle {
+  fill: none;
+  stroke: var(--secondary);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+@media (max-width: 768px) {
+  .scrollWrapper {
+    bottom: 30px;
+    right: 25px;
+    width: 48px;
+    height: 48px;
+  }
+  
+  .scrollButton {
+    width: 40px;
+    height: 40px;
+  }
+}
+

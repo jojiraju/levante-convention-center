@@ -1,66 +1,48 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Venues from "@/components/Venues";
+import Catalog from "@/components/Catalog";
+import Services from "@/components/Services";
+import Gallery from "@/components/Gallery";
+import Footer from "@/components/Footer";
+import Preloader from "@/components/Preloader";
+import BookingModal from "@/components/BookingModal";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main>
+      <Preloader />
+      <Navbar onBookNow={openModal} />
+      <Hero onPlanEvent={openModal} />
+      <About onInquire={openModal} />
+      <Venues />
+      <Catalog />
+      <Services />
+      <Gallery />
+      <section className="py-32 text-center flex flex-col items-center justify-center" 
+               style={{ backgroundColor: 'var(--secondary)', color: 'var(--primary)', minHeight: '60vh' }}>
+        <h2 className="mb-6" style={{ fontSize: '0.8rem', letterSpacing: '0.4em' }}>Ready to begin?</h2>
+        <h1 className="mb-12 max-w-4xl" style={{ fontSize: 'clamp(2rem, 8vw, 4.5rem)', lineHeight: '1.1' }}>
+          Let's Create Something Remarkable Together
+        </h1>
+        <button onClick={openModal} className="premium-button" style={{ borderColor: 'var(--primary)', color: 'var(--primary)' }}>
+          Get in Touch
+        </button>
+      </section>
+      <Footer />
+      <ScrollToTop />
+      
+      <BookingModal isOpen={isModalOpen} onClose={closeModal} />
+    </main>
   );
 }
